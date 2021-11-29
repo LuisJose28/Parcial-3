@@ -1,4 +1,4 @@
-/algoritmo para butacas de cine
+//algoritmo para butacas de cine
 
 
 #include <stdio.h>
