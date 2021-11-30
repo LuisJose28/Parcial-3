@@ -1,0 +1,105 @@
+#include <stdio.h>
+
+void AsientosCine() // esta funcion imprime la distribucion de los asientos del cine
+{
+    int fila;// esta variable es para imprimir los valores que indican la fila de la sala del cine(0-7).
+    int columna = 0;// esta variable es para imprimir los valores que indican la columna de la sala del cine(0-7).
+    int cine[8][8];
+    int x, y; // filas y columnas rellenadas con '11'.
+    int n = 0;//esta variable sirve como contador para hacer la fila que indica la columna de asientos(0-7).
+
+    for (fila= 0; fila < 8; fila++)//bucle para imprimir la primera fila que indica los asientos
+    {
+        printf("  %i", fila); 
+    }
+    printf("\n");
+    
+
+    for (x = 0; x < 8; x++)
+    {
+        n++;
+        columna = n -1;// Formula para imrpimir la primera columna que indica los asientos
+
+        printf("%d ", columna);
+        for (y = 0; y < 8; y++)
+        {
+            cine[x][y] = 11;
+            printf("%d|", cine[x][y]);
+        }
+        printf("\n");
+    }
+    return;
+}
+
+
+void SillasReservadas() //Funcion que impre las sillas que han sido reservadas
+{
+
+    int fila;// esta variable es para imprimir los valores que indican la fila de la sala del cine(0-7).
+    int columna = 0;// esta variable es para imprimir los valores que indican la columna de la sala del cine(0-7).
+    int cine[8][8];
+    int x, y; // filas y columnas rellenadas con '11'.
+    int n = 0;//esta variable sirve como contador para hacer la fila que indica la columna de asientos(0-7).
+    int silla1, silla2;
+
+
+
+    printf("\n-Seleccione la Fila que desea: ");
+    scanf("%i", &silla1);
+
+    printf("-Seleccione la Columna que desea: ");
+    scanf("%i", &silla2);
+    printf("\n");
+
+
+    if (silla1 < 8 && silla2 < 8)
+    {
+        for (fila= 0; fila < 8; fila++)//bucle para imprimir la primera fila que indica los asientos
+        {
+            printf("  %i", fila); 
+        }
+        printf("\n");
+    
+        for (x = 0; x < 8; x++)
+        {
+            n++;
+            columna = n -1;// Formula para imrpimir la primera columna que indica los asientos
+
+            printf("%d ", columna);
+            for (y = 0; y < 8; y++)
+            {   
+                cine[silla1][silla2] = 88;
+                printf("%d|", cine[x][y]);
+            }
+            printf("\n");
+        }
+    
+        return ;
+    }else{
+        printf("-El numero ingresado en la Fila o Columna es invalido. Por favor volver a intentar.\n");
+    }
+
+}
+
+
+int main(){
+
+    int fila;// esta variable es para imprimir los valores que indican la fila de la sala del cine(0-7).
+    int columna = 0;// esta variable es para imprimir los valores que indican la columna de la sala del cine(0-7).
+    int cine[8][8];
+    int x, y; // filas y columnas rellenadas con '11'.
+    int n = 0;//esta variable sirve como contador para hacer la fila que indica la columna de asientos(0-7).
+    int b; //esta variable sera el maximo de capacidad para reservar una silla
+
+    printf("\n* Reservacion de Asientos *\n\n");
+    AsientosCine();
+
+    for (b = 0; b < 32; b++)
+    {
+
+        SillasReservadas();
+    } 
+
+    
+    return 0;
+}
