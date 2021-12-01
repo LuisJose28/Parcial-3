@@ -145,14 +145,19 @@ int main(){
 
         case 2: 
             printf("\n* Reservacion de Asientos *\n"); 
-            do
+            for (int i = 0; i <= 6; i++)
             {
+                do
+                {
                 Asientos();
                 SillasReservadas();
                 printf("\n-Para hacer otra reservacion presione 1. Si desea terminar presione 0: ");
                 scanf("%i", &luisEspinosa); //esta linea servira para terminar o repetir el programa. 0 para no. 1 para Si.
 
-            } while (luisEspinosa != 0);
+                } while (luisEspinosa != 0);
+            }
+            
+            
         
             break;
 
