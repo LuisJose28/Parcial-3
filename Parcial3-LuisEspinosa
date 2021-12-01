@@ -120,6 +120,7 @@ int main(){
     int x, y; // Esta variable sirve para rellenar las filas y columnas rellenadas con '11'.
     int n = 0;//esta variable sirve como contador para hacer la fila que indica la columna de asientos(0-7).
     int sillaUno, sillaDos;//Estas variables sirven para preguntarle al usuario cual silla quiere.
+    int b; //esta variable sera el maximo de capacidad para reservar una silla
     int terminar;//Esta variable sirve para finalizar el ciclo do-while
     int accion;//Esta variable sirve para controlar el ciclo switch-case
     int luisEspinosa;//Esta variable sirve para finalizar el ciclo do-while de la reservacion de sillas
@@ -144,21 +145,12 @@ int main(){
             break;
 
         case 2: 
-            printf("\n* Reservacion de Asientos *\n"); 
-            for (int i = 0; i <= 6; i++)
+            printf("\n* Reservacion de Asientos *\n");
+            Asientos();
+            for (b = 0; b < 6; b++)
             {
-                do
-                {
-                Asientos();
-                SillasReservadas();
-                printf("\n-Para hacer otra reservacion presione 1. Si desea terminar presione 0: ");
-                scanf("%i", &luisEspinosa); //esta linea servira para terminar o repetir el programa. 0 para no. 1 para Si.
-
-                } while (luisEspinosa != 0);
+            SillasReservadas();
             }
-            
-            
-        
             break;
 
         case 3: 
