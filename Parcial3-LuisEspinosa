@@ -1,6 +1,14 @@
 #include <stdio.h>
+/* Programa: SalaDeCine.c */
+/*
+Análisis del problema: 
+Entrada: Imprimir un arreglo 8X8 que sera la sala del cine
+Proceso: Pedirle al usuario los asientos que deseam por medio de filas y columnas
+Salida: Imprimir los asientos del cine seleccionados por el usuario
+*/
 
-void AsientosCine() // esta funcion imprime la distribucion de los asientos del cine
+
+void PuestosCine() // esta funcion imprime la distribucion de los asientos del cine
 {
     int fila;// esta variable es para imprimir los valores que indican la fila de la sala del cine(0-7).
     int columna = 0;// esta variable es para imprimir los valores que indican la columna de la sala del cine(0-7).
@@ -31,6 +39,22 @@ void AsientosCine() // esta funcion imprime la distribucion de los asientos del 
     return;
 }
 
+void Asientos() // esta funcion servira de apoyo a la funcion de sillas reservadas
+{
+    int columna = 0;// esta variable es para imprimir los valores que indican la columna de la sala del cine(0-7).
+    int cine[8][8];
+    int x, y; // filas y columnas rellenadas con '11'.
+
+    for (x = 0; x < 8; x++)
+    {
+        for (y = 0; y < 8; y++)
+        {
+            cine[x][y] = 11;
+        }
+    }
+    return;
+}
+
 
 void SillasReservadas() //Funcion que impre las sillas que han sido reservadas
 {
@@ -40,19 +64,17 @@ void SillasReservadas() //Funcion que impre las sillas que han sido reservadas
     int cine[8][8];
     int x, y; // filas y columnas rellenadas con '11'.
     int n = 0;//esta variable sirve como contador para hacer la fila que indica la columna de asientos(0-7).
-    int silla1, silla2;
-
-
+    int sillaUno, sillaDos;
 
     printf("\n-Seleccione la Fila que desea: ");
-    scanf("%i", &silla1);
+    scanf("%i", &sillaUno);
 
     printf("-Seleccione la Columna que desea: ");
-    scanf("%i", &silla2);
+    scanf("%i", &sillaDos);
     printf("\n");
 
 
-    if (silla1 < 8 && silla2 < 8)
+    if (sillaUno < 8 && sillaDos < 8)
     {
         for (fila= 0; fila < 8; fila++)//bucle para imprimir la primera fila que indica los asientos
         {
@@ -62,13 +84,20 @@ void SillasReservadas() //Funcion que impre las sillas que han sido reservadas
     
         for (x = 0; x < 8; x++)
         {
+            for (y = 0; y < 8; y++)
+            {   
+                cine[sillaUno][sillaDos] = 88;
+            }
+        }
+        for (x = 0; x < 8; x++)
+        {
             n++;
             columna = n -1;// Formula para imrpimir la primera columna que indica los asientos
 
             printf("%d ", columna);
             for (y = 0; y < 8; y++)
             {   
-                cine[silla1][silla2] = 88;
+                cine[sillaUno][sillaDos] = 88;
                 printf("%d|", cine[x][y]);
             }
             printf("\n");
@@ -76,7 +105,8 @@ void SillasReservadas() //Funcion que impre las sillas que han sido reservadas
     
         return ;
     }else{
-        printf("-El numero ingresado en la Fila o Columna es invalido. Por favor volver a intentar.\n");
+        printf("-¡Error al reservar una silla!");
+        printf("\n-El numero ingresado en la Fila o Columna es invalido. Por favor volver a intentar.\n");
     }
 
 }
@@ -87,19 +117,59 @@ int main(){
     int fila;// esta variable es para imprimir los valores que indican la fila de la sala del cine(0-7).
     int columna = 0;// esta variable es para imprimir los valores que indican la columna de la sala del cine(0-7).
     int cine[8][8];
-    int x, y; // filas y columnas rellenadas con '11'.
+    int x, y; // Esta variable sirve para rellenar las filas y columnas rellenadas con '11'.
     int n = 0;//esta variable sirve como contador para hacer la fila que indica la columna de asientos(0-7).
-    int b; //esta variable sera el maximo de capacidad para reservar una silla
-
-    printf("\n* Reservacion de Asientos *\n\n");
-    AsientosCine();
-
-    for (b = 0; b < 32; b++)
-    {
-
-        SillasReservadas();
-    } 
-
+    int sillaUno, sillaDos;//Estas variables sirven para preguntarle al usuario cual silla quiere.
+    int terminar;//Esta variable sirve para finalizar el ciclo do-while
+    int accion;//Esta variable sirve para controlar el ciclo switch-case
+    int luisEspinosa;//Esta variable sirve para finalizar el ciclo do-while de la reservacion de sillas
     
+    printf("\n* Parcial N°3 *");
+    printf("\n-Programa hecho por: Luis Espinosa / 8-992-2338\n-Salon: ISF-111\n");
+
+    printf("\n* Bienvenidos al Cine AnkerField. Disfrute su Noche *\n\n");
+    do
+    {
+        printf("Seleccione que desea hacer: ");
+        printf("\n-Ingrese 1 para ver la sala de cine disponible. \n-Ingrese 2 para hacer una reservacion. \n-Ingrese 3 Terminar. \n");
+        printf("\n-Operacion a realizar: ");
+        scanf("%i", &accion);
+
+
+        switch (accion) //usaremos esta condicional multiple para escoger la operacion a realizar
+        {
+        case 1:
+            printf("\n* Asientos disponibles para esta noche *\n");
+            PuestosCine();
+            break;
+
+        case 2: 
+            printf("\n* Reservacion de Asientos *\n"); 
+            do
+            {
+                Asientos();
+                SillasReservadas();
+                printf("\n-Para hacer otra reservacion presione 1. Si desea terminar presione 0: ");
+                scanf("%i", &luisEspinosa); //esta linea servira para terminar o repetir el programa. 0 para no. 1 para Si.
+
+            } while (luisEspinosa != 0);
+        
+            break;
+
+        case 3: 
+            printf("\n* Gracias por su visita, Hasta luego\n");
+            break;
+        
+        default:
+            printf("-No ha digitado un numero correcto, por favor vuelva a intentarlo");
+            break;
+        }
+        
+        printf("\n-Si desea volver a la pagina principal ingrese 1. Si desea salir ingrese 0: ");
+        scanf("%i", &terminar); //esta linea servira para terminar o repetir el programa. 0 para no. 1 para Si.
+
+    } while (terminar != 0);
+    printf("\n-Gracias por preferir Cine AnkerField, Lo esperamos pronto. \n");
+
     return 0;
 }
